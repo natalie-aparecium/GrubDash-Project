@@ -107,7 +107,7 @@ function dishQuantityPropertyNotInteger(req, res, next) {
 };
 
 //create a new order
-function create(req, res) {
+function create(req, res, next) {
     const { data: { deliverTo, mobileNumber, status, dishes } = {} } = req.body;
     const newId = new nextId;
     const newOrder = {
@@ -143,21 +143,21 @@ function read(req, res) {
 
 
 module.exports = {
-    create: [
-        bodyDataHas("deliverTo"),
-        bodyDataHas("mobileNumber"),
-        bodyDataHas("dishes"),
-        bodyDataHas("status"),
-        dishQuantityPropertyMissing,
-        dishQuantityPropertyNotInteger,
-        dishQuantityisZero,
-        deliverToPropertyIsValid,
-        mobileNumberPropertyIsValid,
-        dishesPropertyArray,
-        dishesPropertyEmpty,
-        create,
-    ],
     list,
+    create: [
+      bodyDataHas("deliverTo"),
+      bodyDataHas("mobileNumber"),
+      bodyDataHas("dishes"),
+      bodyDataHas("status"),
+      dishQuantityPropertyMissing,
+      dishQuantityPropertyNotInteger,
+      dishQuantityisZero,
+      deliverToPropertyIsValid,
+      mobileNumberPropertyIsValid,
+      dishesPropertyArray,
+      dishesPropertyEmpty,
+      create,
+    ],
     read: [orderExists, read],
     
 };
